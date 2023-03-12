@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @section('title')
-    Store Dashboard Product
+    Store Dashboard Transaction
 @endsection
 @section('content')
     <div class="section-content section-dashboard-home" data-aos="fade-up">
