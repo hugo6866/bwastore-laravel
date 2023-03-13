@@ -38,7 +38,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-6">
-                                                <div class="product-title">Status</div>
+                                                <div class="product-title">Payment Status</div>
                                                 <div class="product-subtitle text-danger">
                                                     Pending
                                                 </div>
