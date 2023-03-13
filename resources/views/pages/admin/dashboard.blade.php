@@ -52,7 +52,7 @@
                             <div class="card mb-2">
                                 <div class="card-body">
                                     <div class="dashboard-cart-title">Customer</div>
-                                    <div class="dashboard-cart-subtitle">$15.209</div>
+                                    <div class="dashboard-cart-subtitle">{{ $customer }}</div>
                                 </div>
                             </div>
                         </div>
@@ -60,7 +60,7 @@
                             <div class="card mb-2">
                                 <div class="card-body">
                                     <div class="dashboard-cart-title">Revenue</div>
-                                    <div class="dashboard-cart-subtitle">$335.202</div>
+                                    <div class="dashboard-cart-subtitle">${{ $revenue }}</div>
                                 </div>
                             </div>
                         </div>
@@ -68,7 +68,7 @@
                             <div class="card mb-2">
                                 <div class="card-body">
                                     <div class="dashboard-cart-title">Transaction</div>
-                                    <div class="dashboard-cart-subtitle">5.324.333</div>
+                                    <div class="dashboard-cart-subtitle">{{ $transaction }}</div>
                                 </div>
                             </div>
                         </div>
