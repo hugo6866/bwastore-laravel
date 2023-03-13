@@ -73,54 +73,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 mt-2">
-                        <h5 class="mb-3">Recent Transactions</h5>
-                        <a href="/dashboard-transactions-details.html" class="card card-list d-block">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-1">
-                                        <img src="/images/dashboard-icon-1.png" alt="" />
-                                    </div>
-                                    <div class="col-md-4">Shirup</div>
-                                    <div class="col-md-3">User</div>
-                                    <div class="col-md-3">12 January 2020</div>
-                                    <div class="col-md-1 d-none d-md-block">
-                                        <img src="images/expand-more.svg" alt="" />
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="/dashboard-transactions-details.html" class="card card-list d-block">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-1">
-                                        <img src="/images/dashboard-icon-2.png" alt="" />
-                                    </div>
-                                    <div class="col-md-4">LeBrone</div>
-                                    <div class="col-md-3">User</div>
-                                    <div class="col-md-3">13 January 2020</div>
-                                    <div class="col-md-1 d-none d-md-block">
-                                        <img src="images/expand-more.svg" alt="" />
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="/dashboard-transactions-details.html" class="card card-list d-block">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-1">
-                                        <img src="/images/dashboard-icon-3.png" alt="" />
-                                    </div>
-                                    <div class="col-md-4">Soffa</div>
-                                    <div class="col-md-3">User</div>
-                                    <div class="col-md-3">14 January 2020</div>
-                                    <div class="col-md-1 d-none d-md-block">
-                                        <img src="images/expand-more.svg" alt="" />
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>
