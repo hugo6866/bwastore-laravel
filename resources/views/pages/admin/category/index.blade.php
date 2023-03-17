@@ -47,9 +47,71 @@
                     <p class="dashboard-subtitle">List of Categories</p>
                 </div>
                 <div class="dashboard-content">
-                    <div class="row"></div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <a href="{{ route('category.create') }}" class="btn btn-primary mb-3">
+                                    + Tambah Kategory Baru
+                                </a>
+                                <div class="table-responsive">
+                                    <table class="table table-hover scroll-horizontal-vertical w-100" id="crudTable">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Name</th>
+                                                <th>Photo</th>
+                                                <th>Slug</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
+@push('addon-script')
+    <script>
+        var dataTable = $("#crudTable").dataTable({
+            processing: true,
+            serverSide: true,
+            ordering: true,
+            ajax: {
+                url: '{!! url()->current() !!}',
+            },
+            columns: [{
+                    data: 'id',
+                    name: 'id'
+                },
+                {
+                    data: 'name',
+                    name: 'name'
+                },
+                {
+                    data: 'photo',
+                    name: 'photo'
+                },
+                {
+                    data: 'slug',
+                    name: 'slug'
+                },
+                {
+                    data: 'action',
+                    name: 'name',
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: 'false',
+                    searchable: ' false',
+                    width: '15%'
+                }
+            ]
+        })
+    </script>
+@endpush

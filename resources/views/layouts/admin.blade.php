@@ -31,7 +31,7 @@
                     <a href="#" class="list-group-item list-group-item-action">
                         Products
                     </a>
-                    <a href="#"
+                    <a href="{{ route('category.index') }}"
                         class="list-group-item list-group-item-action {{ request()->is('admin/categories*') ? 'active' : '' }}">
                         Categories
                     </a>
