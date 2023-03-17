@@ -36,6 +36,8 @@ Route::prefix('admin')
     ->namespace("Admin")
     ->group(function () {
         Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin-dashboard');
+        //todo fixx this resource doesnt load
+        Route::resource('category', 'App\Http\Controllers\Admin\CategoryController@index');
     });
 
 Auth::routes();
