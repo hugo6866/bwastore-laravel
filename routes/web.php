@@ -30,14 +30,14 @@ Route::get('/dashboard/transactions/{id}', [App\Http\Controllers\DashboardTransa
 Route::get('/dashboard/settings', [App\Http\Controllers\DashboardSettingController::class, 'store'])->name('dashboard-settings-store');
 Route::get('/dashboard/account', [App\Http\Controllers\DashboardSettingController::class, 'account'])->name('dashboard-settings-account');
 
+
 //     ->middleware(["auth","admin"])
 
 Route::prefix('admin')
     ->namespace("Admin")
     ->group(function () {
         Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin-dashboard');
-        //todo fixx this resource doesnt load
-        Route::resource('category', 'App\Http\Controllers\Admin\CategoryController@index');
+        Route::resource('category', "App\Http\Controllers\Admin\CategoryController");
     });
 
 Auth::routes();
