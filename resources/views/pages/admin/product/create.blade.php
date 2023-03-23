@@ -18,7 +18,6 @@
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
                                 <img src="/images/product.png" alt="" class="rounded-circle me-2 profile-picture" />
-                                Hi, Product
                             </a>
                             <div class="dropdown-menu">
                                 <a href="/dashboard.html" class="dropdown-item">Dashboard</a>
@@ -30,7 +29,7 @@
                     </ul>
                     <ul class="navbar-nav d-block d-lg-none">
                         <li class="nav-item">
-                            <a href="#" class="nav-link"> Hi, Product </a>
+                            <a href="#" class="nav-link"> Hi, User </a>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link d-inline-block"> Cart</a>
@@ -73,7 +72,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Owner Product</label>
-                                                    <select name="users.id" class="form-control">
+                                                    <select name="users_id" class="form-control">
                                                         @foreach ($users as $user)
                                                             <option value="{{ $user->id }}"> {{ $user->name }}
                                                             </option>
@@ -84,7 +83,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Category Product</label>
-                                                    <select name="users.id" class="form-control">
+                                                    <select name="categories_id" class="form-control">
                                                         @foreach ($categories as $category)
                                                             <option value="{{ $category->id }}"> {{ $category->name }}
                                                             </option>
@@ -94,7 +93,7 @@
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label>Product Pricce</label>
+                                                    <label>Product Price</label>
                                                     <input type="number" name="price" class="form-control" required>
                                                 </div>
                                             </div>
