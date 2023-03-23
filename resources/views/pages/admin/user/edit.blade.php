@@ -68,19 +68,23 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Name User</label>
-                                                    <input type="text" name="name" class="form-control" required>
+                                                    <input value="{{ $item->name }}"type="text" name="name"
+                                                        class="form-control" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Email User</label>
-                                                    <input type="email" name="email" class="form-control" required>
+                                                    <input value="{{ $item->email }}" type="email" name="email"
+                                                        class="form-control" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Password User</label>
-                                                    <input type="password" name="password" class="form-control" required>
+                                                    <input type="password" name="password" class="form-control">
+                                                    <small>Kosongkan jika tidak ingin mengganti password</small>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Roles</label>
                                                     <select name="roles" required class="form-control">
+                                                        <option value="{{ $item->roles }}" selected>Tidak diganti</option>
                                                         <option value="ADMIN">Admin</option>
                                                         <option value="USER">User</option>
                                                     </select>
