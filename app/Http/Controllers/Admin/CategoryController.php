@@ -14,17 +14,18 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index()
     {
         //
         if (request()->ajax()) {
+
             $query = Category::query();
             return Datatables::of($query)
                 ->addColumn('action', function ($item) {
                     return '
                    <div class="btn-group">
                         <div class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle mr-1 mb-1"
+                            <button class="btn btn-primary dropdown-toggle me-1 mb-1"
                                 type="button" data-toggle="dropdown">
                                 Aksi
                             </button>
@@ -43,7 +44,7 @@ class CategoryController extends Controller
                    </div>
                    ';
                 })
-                ->editColumns('photo', function ($item) {
+                ->editColumn('photo', function ($item) {
                     return $item->photo ? '<img src="' . Storage::url($item->photo) . '" style="max-height: 40px;"/>' : '';
                 })
                 ->rawColumns(['action', 'photo'])

@@ -50,21 +50,23 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
-                                <a href="{{ route('category.create') }}" class="btn btn-primary mb-3">
-                                    + Tambah Kategory Baru
-                                </a>
-                                <div class="table-responsive">
-                                    <table class="table table-hover scroll-horizontal-vertical w-100" id="crudTable">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Name</th>
-                                                <th>Photo</th>
-                                                <th>Slug</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                    </table>
+                                <div class="card-body">
+                                    <a href="{{ route('category.create') }}" class="btn btn-primary mb-3">
+                                        + Tambah Kategory Baru
+                                    </a>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover scroll-horizontal-vertical w-100" id="crudTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Name</th>
+                                                    <th>Photo</th>
+                                                    <th>Slug</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -83,6 +85,12 @@
             ordering: true,
             ajax: {
                 url: '{!! url()->current() !!}',
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log('Error:', textStatus, errorThrown);
+                    if (jqXHR.responseJSON && jqXHR.responseJSON.message) {
+                        console.log('Custom message:', jqXHR.responseJSON.message);
+                    }
+                }
             },
             columns: [{
                     data: 'id',
@@ -102,13 +110,9 @@
                 },
                 {
                     data: 'action',
-                    name: 'name',
-                },
-                {
-                    data: 'action',
                     name: 'action',
-                    orderable: 'false',
-                    searchable: ' false',
+                    orderable: false,
+                    searchable: false,
                     width: '15%'
                 }
             ]
