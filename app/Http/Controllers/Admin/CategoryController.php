@@ -28,7 +28,7 @@ class CategoryController extends Controller
                    <div class="btn-group">
                         <div class="dropdown">
                             <button class="btn btn-primary dropdown-toggle me-1 mb-1"
-                                type="button" data-toggle="dropdown">
+                                type="button" data-bs-toggle="dropdown">
                                 Aksi
                             </button>
                             <div class="dropdown-menu">
@@ -37,7 +37,7 @@ class CategoryController extends Controller
                                 </a>
                                 <form action="' . route('category.destroy', $item->id) . '" method="POST">
                                 ' . method_field('delete') . csrf_field() . '
-                                <button type="submit" class="dropdown_item text-danger">
+                                <button type="submit" class="dropdown-item text-danger">
                                     Hapus
                                 </button>
                                 </form>
@@ -89,7 +89,10 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $item = Category::findOrFail($id);
+        return view('pages.admin.category.edit', [
+            'item' => $item
+        ]);
     }
 
     /**
@@ -97,7 +100,12 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, string $id)
     {
-        //
+        $data = $request->all();
+        $data['slug'] = Str::slug($request->name);
+        $data['photo'] = $request->file('photo')->store('assets/category', 'public');
+        $item = Category::findOrFail($id);
+        $item->update($data);
+        return redirect()->route('category.index');
     }
 
     /**
