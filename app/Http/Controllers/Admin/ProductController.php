@@ -10,6 +10,8 @@ use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Admin\ProductRequest;
 use Illuminate\Support\Str;
+use App\Models\User;
+use App\Models\Category;
 
 class ProductController extends Controller
 {
@@ -58,7 +60,12 @@ class ProductController extends Controller
     public function create()
     {
         //
-        return view('pages.admin.product.create');
+        $users = User::all();
+        $categories = Category::all();
+        return view('pages.admin.product.create', [
+            'users' => $users,
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -67,7 +74,7 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         $data = $request->all();
-        $data['password'] = bcrypt($request->password);
+        $data['slug'] = Str::slug($request->name);
         Product::create($data);
         return redirect()->route('product.index');
     }
