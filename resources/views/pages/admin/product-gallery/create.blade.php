@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title')
-    Category
+    Gallery
 @endsection
 @section('content')
     <div id="page-content-wrapper">
@@ -43,8 +43,8 @@
         <div class="section-content section-dashboard-home" data-aos="fade-up">
             <div class="container-fluid">
                 <div class="dashboard-heading">
-                    <h2 class="dashboard-title">Category</h2>
-                    <p class="dashboard-subtitle">Create New Category</p>
+                    <h2 class="dashboard-title">Product Gallery</h2>
+                    <p class="dashboard-subtitle">Create New Product Gallery</p>
                 </div>
                 <div class="dashboard-content">
                     <div class="row">
@@ -60,18 +60,25 @@
                             @endif
                             <div class="card">
                                 <div class="card-body">
-                                    <form action="{{ route('category.store') }}" method="POST"
+                                    <form action="{{ route('product-gallery.store') }}" method="POST"
                                         enctype="multipart/form-data">
                                         @csrf
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label>Category Name</label>
-                                                    <input type="text" name="name" class="form-control" required>
+                                                    <label>Product</label>
+                                                    <select name="products_id" class="form-control">
+                                                        @foreach ($products as $product)
+                                                            <option value="{{ $product->id }}">{{ $product->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
+                                            </div>
+                                            <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label>Photo</label>
-                                                    <input type="file" name="photo" class="form-control" required>
+                                                    <label>Product Photo</label>
+                                                    <input type="file" name="photos" class="form-control" required>
                                                 </div>
                                             </div>
                                         </div>

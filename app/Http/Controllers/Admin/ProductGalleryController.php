@@ -64,11 +64,10 @@ class ProductGalleryController extends Controller
     public function create()
     {
         //
-        $users = User::all();
-        $categories = Category::all();
+        $products = Product::all();
+
         return view('pages.admin.product-gallery.create', [
-            'users' => $users,
-            'categories' => $categories
+            'products' => $products
         ]);
     }
 
@@ -78,9 +77,9 @@ class ProductGalleryController extends Controller
     public function store(ProductGalleryRequest $request)
     {
         $data = $request->all();
-        $data['slug'] = Str::slug($request->name);
-        Product::create($data);
-        return redirect()->route('product.index');
+        $data['photos'] = $request->file('photos')->store('assets/product', 'public');
+        ProductGallery::create($data);
+        return redirect()->route('product-gallery.index');
     }
 
     /**
@@ -96,14 +95,6 @@ class ProductGalleryController extends Controller
      */
     public function edit(string $id)
     {
-        $users = User::all();
-        $categories = Category::all();
-        $item = Product::findOrFail($id);
-        return view('pages.admin.product-gallery.edit', [
-            'item' => $item,
-            'users' => $users,
-            'categories' => $categories
-        ]);
     }
 
     /**
@@ -111,14 +102,6 @@ class ProductGalleryController extends Controller
      */
     public function update(ProductGalleryRequest $request, string $id)
     {
-        $data = $request->all();
-
-        $item = Product::findOrFail($id);
-        $data['slug'] = Str::slug($request->name);
-
-
-        $item->update($data);
-        return redirect()->route('product.index');
     }
 
     /**
@@ -127,8 +110,8 @@ class ProductGalleryController extends Controller
     public function destroy(string $id)
     {
         //
-        $item = Product::findOrFail($id);
+        $item = ProductGallery::findOrFail($id);
         $item->delete();
-        return redirect()->route('product.index');
+        return redirect()->route('product-gallery.index');
     }
 }
