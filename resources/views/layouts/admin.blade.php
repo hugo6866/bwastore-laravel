@@ -31,6 +31,9 @@
                     <a href="{{ route('product.index') }}" class="list-group-item list-group-item-action">
                         Products
                     </a>
+                    <a href="{{ route('product-gallery.index') }}" class="list-group-item list-group-item-action">
+                        Galleries
+                    </a>
                     <a href="{{ route('category.index') }}"
                         class="list-group-item list-group-item-action {{ request()->is('admin/categories*') ? 'active' : '' }}">
                         Categories
