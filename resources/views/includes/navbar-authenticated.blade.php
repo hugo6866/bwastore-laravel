@@ -17,8 +17,8 @@
                  <li class="nav-item">
                      <a href="#" class="nav-link">Rewards</a>
                  </li>
-                 <!--Desktop Menu-->
              </ul>
+             <!--Desktop Menu-->
              <ul class="navbar-nav d-none d-lg-flex">
                  <li class="nav-item dropdown">
                      <a href="#" class="nav-link" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
@@ -38,6 +38,7 @@
                      </a>
                  </li>
              </ul>
+             <!--Mobile Menu-->
              <ul class="navbar-nav d-block d-lg-none">
                  <li class="nav-item">
                      <a href="#" class="nav-link"> Hi, User </a>
