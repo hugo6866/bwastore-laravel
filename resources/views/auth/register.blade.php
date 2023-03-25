@@ -15,8 +15,8 @@
                             <div class="form-group">
                                 <label for="">Full Name</label>
                                 <input id="name" v-model="name" type="text"
-                                    class="form-control @error('name') is-invalid @enderror" name="name"
-                                    value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                    class="form-control @error('name') is-invalid @enderror" name="name" required
+                                    autocomplete="name" autofocus>
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -25,11 +25,11 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="">Email Address</label>
+                                <label for="email">Email Address</label>
                                 <input id="email" v-model="email" type="email"
-                                    class="form-control @error('email') is-invalid @enderror" name="email"
-                                    value="{{ old('email') }}" required autocomplete="email">
-
+                                    class="form-control @error('email') is-invalid @enderror"
+                                    :class="{ 'is-invalid': this.email_unavailable }" name="email" required
+                                    autocomplete="email" :v-on="checkEmailAvailable()">
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -102,7 +102,8 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-success w-100 btn-block mt-4">
+                            <button type="submit" class="btn btn-success w-100 btn-block mt-4"
+                                :disabled="this.email_unavailable">
                                 Sign Up Now
                             </button>
                             <a href="{{ route('login') }}" class="btn btn-signup w-100 btn-block mt-2">
@@ -121,6 +122,7 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue-toast-notification@3"></script>
     <link href="https://cdn.jsdelivr.net/npm/vue-toast-notification@3/dist/theme-sugar.css" rel="stylesheet" />
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
 
     <script>
         const toast = VueToast.useToast();
@@ -129,12 +131,41 @@
                 return {
                     name: "Joko Widodo",
                     email: "jokowi@gmail.com",
-                    password: "",
                     is_store_open: true,
                     store_name: "",
+                    email_unavailable: false
                 };
             },
-            methods: {},
+            methods: {
+                checkEmailAvailable: function() {
+                    var self = this;
+                    axios.get('{{ route('api-register-check') }}', {
+                            params: {
+                                email: this.email
+                            }
+                        })
+                        .then(function(response) {
+                            if (response.data == "Available") {
+                                toast.open({
+                                    message: "Email anda tersedia! Silahkan lanjut langkah selanjutnya!.",
+                                    type: "success",
+                                    duration: 1000,
+                                    position: "top",
+                                });
+                                self.email_unvailable = false;
+                            } else {
+                                toast.open({
+                                    message: "Maaf, tampaknya email sudah terdaftar pada sistem kami.",
+                                    type: "error",
+                                    duration: 2000,
+                                    position: "top",
+                                });
+                                self.email_unvailable = true;
+                            }
+                            console.log(response);
+                        });
+                }
+            },
             mounted() {
                 AOS.init();
                 // toast.open({
