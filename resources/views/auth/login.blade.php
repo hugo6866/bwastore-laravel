@@ -13,19 +13,36 @@
                             Belanja kebutuhan utama, <br />
                             menjadi lebih mudah
                         </h2>
-                        <form action="" class="mt-3">
+                        <form method="POST" action="{{ route('login') }}" class="mt-3">
+                            @csrf
                             <div class="form-group">
                                 <label for="">Email Address</label>
-                                <input type="email" id="" class="form-control w-75" />
+                                <input id="email" type="email"
+                                    class="form-control w-75 @error('email') is-invalid @enderror" name="email"
+                                    value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="">Password</label>
-                                <input type="password" id="" class="form-control w-75" />
+                                <input id="password" type="password"
+                                    class="form-control w-75 @error('password') is-invalid @enderror" name="password"
+                                    required autocomplete="current-password">
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
-                            <a href="/dashboard.html" class="btn btn-success btn-block w-75 mt-4">
+                            <button type="submit" class="btn btn-success btn-block w-75 mt-4">
                                 Sign in to My Account
-                            </a>
-                            <a href="/register.html" class="btn btn-signup btn-block w-75 mt-2">
+                            </button>
+                            <a href="{{ route('register') }}" class="btn btn-signup btn-block w-75 mt-2">
                                 Sign up
                             </a>
                         </form>
