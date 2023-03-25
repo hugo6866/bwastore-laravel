@@ -68,8 +68,9 @@
                     <div class="col-12" data-aos="fade-up">
                         <h5>New Products</h5>
                     </div>
-                    @php $incrementCategory = 0 @endphp
                     <div class="row">
+                        @php $incrementCategory = 0 @endphp
+
                         @forelse ($products as $product)
                             <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up"
                                 data-aos-delay="{{ $incrementCategory += 100 }}">
@@ -97,3 +98,17 @@
         </section>
     </div>
 @endsection
+
+@push('addon-style')
+    <style>
+        .navbar {
+            position: relative;
+            z-index: 1000;
+        }
+
+        #storeCarousel {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+@endpush
