@@ -95,12 +95,13 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="provinces_id">Province</label>
+
                                 <select name="provinces_id" id="provinces_id" class="form-control mt-2 mb-2"
-                                    :v-if="provinces" v-model="provinces_id">
-                                    <option v-for="province in provinces" :value="provinces.id">@{{ province.name }}
+                                    v-if="provinces" v-model="provinces_id">
+                                    <option v-for="province in provinces" :value="province.id">@{{ province.name }}
                                     </option>
-                                    <select v-else class="form-control"></select>
                                 </select>
+                                <select v-else class="form-control"></select>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -191,7 +192,8 @@
                     }
                 },
                 getRegenciesData() {
-                    axios.get('{{ url('api/regencies') }}/' + 1)
+                    console.log(this.provinces_id)
+                    axios.get('{{ url('api/regencies') }}/' + this.provinces_id)
                         .then(function(response) {
                             this.regencies = response.data;
                         })
@@ -204,6 +206,7 @@
             },
             watch: {
                 provinces_id: function(val, oldVal) {
+                    console.log("idk")
                     this.regencies_id = null;
                     this.getRegenciesData();
                 }
