@@ -34,22 +34,34 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td style="width: 25%">
-                                        <img src="/images/product-1.jpg" alt="" class="cart-image w-100" />
-                                    </td>
-                                    <td style="width: 35%">
-                                        <div class="product-title">Sofa Ternyaman</div>
-                                        <div class="product-subtitle">by User321</div>
-                                    </td>
-                                    <td style="width: 35%">
-                                        <div class="product-title">$29,240</div>
-                                        <div class="product-subtitle">USD</div>
-                                    </td>
-                                    <td style="width: 25%">
-                                        <a href="#" class="btn btn-remove-cart">Remove</a>
-                                    </td>
-                                </tr>
+                                @foreach ($carts as $cart)
+                                    @if ($cart->product)
+                                        <tr>
+                                            <td style="width: 25%">
+                                                @if ($cart->product->galleries)
+                                                    <img src="{{ Storage::url($cart->product->galleries->first()->photos) }}"
+                                                        alt="" class="cart-image w-100" />
+                                                @endif
+                                            </td>
+                                            <td style="width: 35%">
+                                                <div class="product-title">{{ $cart->product->name }}</div>
+                                                <div class="product-subtitle">by {{ $cart->product->user->store_name }}
+                                                </div>
+                                            </td>
+                                            <td style="width: 35%">
+                                                <div class="product-title">${{ number_format($cart->product->price) }}</div>
+                                                <div class="product-subtitle">USD</div>
+                                            </td>
+                                            <td style="width: 25%">
+                                                <form action="{{ route('cart-delete', $cart->id) }}" method="POST">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-remove-cart">Remove</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endif
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
