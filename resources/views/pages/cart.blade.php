@@ -107,8 +107,12 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="regencies_id">City</label>
-                                <input type="text" class="form-control mt-2 mb-2" id="regencies_id" name="regencies_id"
-                                    value="Bandung" />
+                                <select name="regencies_id" id="regencies_id" class="form-control mt-2 mb-2"
+                                    v-if="regencies">
+                                    <option v-for="regency in regencies" :value="regency.id">@{{ regency.name }}
+                                    </option>
+                                </select>
+                                <select v-else class="form-control"></select>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -191,12 +195,13 @@
                         console.error('Error fetching provinces:', error);
                     }
                 },
-                getRegenciesData() {
-                    console.log(this.provinces_id)
-                    axios.get('{{ url('api/regencies') }}/' + this.provinces_id)
-                        .then(function(response) {
-                            this.regencies = response.data;
-                        })
+                async getRegenciesData() {
+                    try {
+                        const response = await axios.get('{{ url('api/regencies') }}/' + this.provinces_id);
+                        this.regencies = response.data;
+                    } catch (error) {
+                        console.error('Error fetching provinces:', error);
+                    }
                 }
             },
             mounted() {
