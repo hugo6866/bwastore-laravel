@@ -29,13 +29,14 @@
                                 <input id="email" v-model="email" type="email"
                                     class="form-control @error('email') is-invalid @enderror"
                                     :class="{ 'is-invalid': this.email_unavailable }" name="email" required
-                                    autocomplete="email" :v-on="checkEmailAvailable()">
+                                    autocomplete="email" @keyup="onEmailKeyUp" @keydown="onEmailKeyDown">
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
+
                             <div class="form-group">
                                 <label for="">Password</label>
                                 <input id="password" type="password"
@@ -129,14 +130,34 @@
         const app = Vue.createApp({
             data() {
                 return {
-                    name: "Joko Widodo",
-                    email: "jokowi@gmail.com",
-                    is_store_open: true,
+                    name: "",
+                    email: "",
+                    is_store_open: false,
                     store_name: "",
                     email_unavailable: false
                 };
             },
             methods: {
+                onEmailKeyUp(event) {
+                    const email = event.target.value;
+                    const domainIndex = email.lastIndexOf('@');
+                    const domainEnd = email.lastIndexOf('.');
+                    if (domainIndex > -1 && email.length > domainIndex + 1 > domainEnd > -1) {
+                        this.scheduleEmailCheck();
+                    }
+                },
+                onEmailKeyDown() {
+                    clearTimeout(this.emailCheckTimeout);
+                },
+
+                scheduleEmailCheck() {
+                    clearTimeout(this.emailCheckTimeout);
+
+                    this.emailCheckTimeout = setTimeout(() => {
+                        this.checkEmailAvailable();
+                    }, 500);
+                },
+
                 checkEmailAvailable: function() {
                     var self = this;
                     axios.get('{{ route('api-register-check') }}', {
@@ -168,12 +189,6 @@
             },
             mounted() {
                 AOS.init();
-                // toast.open({
-                //     message: "Maaf, tampaknya email sudah terdaftar pada sistem kami.",
-                //     type: "error",
-                //     duration: 2000,
-                //     position: "top",
-                // });
             },
         });
         app.mount("#register");

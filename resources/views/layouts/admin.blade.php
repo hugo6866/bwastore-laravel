@@ -44,9 +44,12 @@
                     <a href="{{ route('user.index') }}" class="list-group-item list-group-item-action">
                         Users
                     </a>
-                    <a href="/index.html" class="list-group-item list-group-item-action">
-                        Sign Out
-                    </a>
+                    <a href="{{ route('logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                        class="dropdown-item">Logout</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                 </div>
             </div>
             <!--Page Content-->
@@ -60,34 +63,38 @@
                             data-bs-target="#navbarResponsive">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                        <div class="collapse navbar-collapse" id="navbarResponsive">
-                            <!--Desktop Menu-->
-                            <ul class="navbar-nav d-none d-lg-flex ms-auto">
-                                <li class="nav-item dropdown">
-                                    <a href="#" class="nav-link" id="navbarDropdown" role="button"
-                                        data-bs-toggle="dropdown">
-                                        <img src="/images/user.png" alt=""
-                                            class="rounded-circle me-2 profile-picture" />
-                                        Hi, User
-                                    </a>
-                                    <div class="dropdown-menu">
-                                        <a href="/dashboard.html" class="dropdown-item">Dashboard</a>
-                                        <a href="/dashboard-account.html" class="dropdown-item">Settings</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a href="/" class="dropdown-item">Logout</a>
-                                    </div>
-                                </li>
+                        @auth
+                            <div class="collapse navbar-collapse" id="navbarResponsive">
+                                <!--Desktop Menu-->
+                                <ul class="navbar-nav d-none d-lg-flex ms-auto">
+                                    <li class="nav-item dropdown">
+                                        <a href="#" class="nav-link" id="navbarDropdown" role="button"
+                                            data-bs-toggle="dropdown">
+                                            <img src="/images/user.png" alt=""
+                                                class="rounded-circle me-2 profile-picture" />
+                                            Hi, {{ Auth::user()->name }}
 
-                            </ul>
-                            <ul class="navbar-nav d-block d-lg-none">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link"> Hi, User </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link d-inline-block"> Cart</a>
-                                </li>
-                            </ul>
-                        </div>
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <a href="/dashboard.html" class="dropdown-item">Dashboard</a>
+                                            <a href="/dashboard-account.html" class="dropdown-item">Settings</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a href="/" class="dropdown-item">Logout</a>
+                                        </div>
+                                    </li>
+
+                                </ul>
+                                <ul class="navbar-nav d-block d-lg-none">
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link"> Hi, {{ Auth::user()->name }}
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link d-inline-block"> Cart</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        @endauth
                     </div>
                 </nav>
                 {{-- Page Content --}}
